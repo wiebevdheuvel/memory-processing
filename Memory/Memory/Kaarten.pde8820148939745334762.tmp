@@ -1,0 +1,73 @@
+PImage[] voorkant;
+PImage[] achterzijde;
+
+int kaarten[][] = new int[0][0];
+
+int kaartenY = height;
+int achterkant = 0;
+
+String[] afbeeldingen;
+
+int aantalKaarten = 16;
+int kaartenX = width;
+
+
+void tekenKaarten() {
+  float kaartenX = col + 25;
+  float kaartenY= col + 10;
+  float reset = kaartenX;
+  voorkant = new PImage[aantalKaarten];  
+  int afbeelding;
+  kaarten = new int [aantalKaarten][2];
+
+  afbeeldingen = new String[] {
+    "blauw.png", 
+    "cyaan.png", 
+    "geel.png", 
+    "grijs.png", 
+    "groen.png", 
+    "lichtblauw.png", 
+    "magenta.png", 
+    "olijf.png", 
+    "ornaje.png", 
+    "paars.png", 
+    "rood.png", 
+    "roze.png"};
+
+
+  for (int i=0; i<2; i++) {
+    for (int n=0; n< kaarten.length/2; n++) {
+      afbeelding = int(random(1, kaarten.length/2-n) -1);
+      voorkant[n + kaarten.length/2 * i] = loadImage(afbeeldingen[afbeelding]);
+      afbeeldingen[afbeelding] = afbeeldingen[kaarten.length/2 -1 -n];
+    }
+  }
+}
+
+
+
+//void tekenKaart() {
+//  int x = (width - (ZIJDE*AANTAL))/2;
+//  int y = (height - (ZIJDE*AANTAL))/2;
+
+//  for ( int i=0; i< AANTAL; i++) {
+//    tekenKaarten(x, y);
+//    x=x +  ZIJDE + 20;
+//  }
+//}
+
+
+//void tekenKaarten(int x, int y) {
+//  for (int i=0; i<AANTAL; i++) {
+//    fill(255);
+//    rect(x, y, ZIJDE, ZIJDE);
+//    y=y + ZIJDE + 20;
+//  }
+//}
+
+
+
+void randomizeKaarten() {
+}
+
+// 100 bij de array waarde, als waarde < 100 turn kaart

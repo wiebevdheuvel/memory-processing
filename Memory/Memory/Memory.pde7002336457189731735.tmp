@@ -1,0 +1,27 @@
+int schermIndex = 0;
+int col;
+
+void setup() {
+  size(1000, 1000);
+  col = width/10;
+  tekenStartScherm();
+  tekenKnop();
+}
+
+void draw() {
+}
+
+void mousePressed() {
+
+  if (isMuisOpKnop()) {
+    schermIndex = schermIndex +1;
+    tekenSpeelScherm();
+    if (schermIndex > 2) {
+      schermIndex = 1;
+    }
+  }
+  if (schermIndex == 2) {
+    tekenEindScherm();
+  }
+  
+}
