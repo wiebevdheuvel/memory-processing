@@ -1,7 +1,8 @@
-PImage[] kaarten = new PImage[25]; //<>//
+PImage[] kaarten = new PImage[25];
 PImage achterkant; 
 
 int[] kaartenWaarde = new int[25];
+
 
 ArrayList<int[]> kaartenPos = new ArrayList<int[]>();
 
@@ -51,11 +52,14 @@ void tekenKaarten() {
 
 void tekenKaart(int x, int y, int index) {
 
+  //int temp;
+  
   if (kaartenWaarde[index] >= 100) {
     image(achterkant, x, y);
   } else {
     image(kaarten[index], x, y);
   }
+  
 }
 
 void calcKaartenWaarde() {
@@ -66,8 +70,7 @@ void calcKaartenWaarde() {
     kaartenWaarde[i + 1] = waarde + 100;
     waarde++;
   }
-
-  // Waarde doodskaart
+  
   kaartenWaarde[kaartenWaarde.length - 1] = 66 + 100;
 }
 
@@ -90,6 +93,28 @@ void shuffleKaarten() {
   }
 }
 
+int isMuisOverKaart() {
+  int[] temp;
+  for (int i = 0; i < kaartenPos.size(); i++) {
+    temp = kaartenPos.get(i);
+    if (mouseX >= temp[0] && mouseX <= temp[0] + ZIJDE && mouseY >= temp[1] && mouseY <= temp[1] + ZIJDE) {
+      return i;
+    }
+  }
+  return -1;
+}
 
+void draaiKaart(int index) {
 
-// 100 bij de array waarde, als waarde < 100 turn kaart
+  int kaartWaarde = kaartenWaarde[index]; //<>//
+
+  if (kaartWaarde >= 100) {
+    kaartenWaarde[index] -= 100;
+    nOmgedraaideKaart++;
+  } else {
+    kaartenWaarde[index] += 100;
+    nOmgedraaideKaart--;
+  }
+  
+ 
+}

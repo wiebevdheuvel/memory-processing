@@ -30,6 +30,15 @@ void mousePressed() {
   }
 }
 
+void mouseReleased() {
+  int muisOverKaart = isMuisOverKaart();
+  if (muisOverKaart != - 1) {
+    draaiKaart(muisOverKaart);
+  }
+}
+
+
+
 
 int getCol() {
   return col;
