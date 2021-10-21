@@ -1,0 +1,20 @@
+opleverdocument,
+
+volgens aim controle kaart
+
+inhoud:
+
+algorimten:
+minimaal 3 oplossings algoritmen
+mag in psuedocode, met stukje uitleg
+
+software achtitectuur:
+astah plaatje met toelichting
+alle globale waarde boven, functies onder
+
+reflectie op kwaliteit:
+letten op cammelcase, herhalende code weggehaald, goede methodes
+
+testraportage:
+functionele eisen overnemen die gemaakt zijn en aangeven of het gestest of niet getest is
+testen in void setup, alle methodes met returnwaarde hierin, alle functies met parameters

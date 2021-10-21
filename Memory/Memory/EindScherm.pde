@@ -1,10 +1,8 @@
-void tekenEindScherm(){
-  
-}
+void tekenEindScherm() {
+ 
+  background(#620303);
+  textSize(40);
+  fill(#ff0000);
 
-
-void toonWinnaar(){
-}
-
-void tekenResetKnop(){
+  tekenKnop("Restart", col*2, col*7.5, col*6, col*2);
 }

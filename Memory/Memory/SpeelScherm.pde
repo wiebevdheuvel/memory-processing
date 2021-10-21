@@ -3,9 +3,11 @@ final int AANTAL = 5;
 
 int nOmgedraaideKaart = 0;
 
+int score;
+
 void initialiseerSpel() {
 
-  background(#B7EFFF);
+  background(150);
 
   calcKaartenPos();
   laadKaarten();
@@ -14,26 +16,33 @@ void initialiseerSpel() {
 }
 
 void tekenSpeelscherm() {
+  
+  background(150);
   tekenKaarten();
   tekenPunten();
-  checkKaarten();
-  println(nOmgedraaideKaart);
 }
 
 void tekenPunten() {
 }
 
-void tekenDoodsKaarten() {
+void checkKaarten() {
+
+  if (kaartenWaarde[eersteKaartIndex] == kaartenWaarde[tweedeKaartIndex]) {
+    println("match ");
+    score++;
+    kaartenWaarde[eersteKaartIndex] = -1;
+    kaartenWaarde[tweedeKaartIndex] = -1;
+  } else { 
+    if (kaartenWaarde[eersteKaartIndex] == 66 || kaartenWaarde[tweedeKaartIndex] == 66) {
+      score--;
+      println("doodskaart gevonden - 1 punt");
+    }
+    println("geen match ");
+    draaiKaart(eersteKaartIndex); 
+    draaiKaart(tweedeKaartIndex);
+  }
 }
 
-void checkKaarten() {
-  
-  if (nOmgedraaideKaart == 2) {
-    delay(1000);
-    for (int i=0; i<kaartenWaarde.length; i++) {
-      if (kaartenWaarde[i] < 100) {
-        draaiKaart(i);
-      }
-    }
-  }
+int getScore() {
+  return score;
 }

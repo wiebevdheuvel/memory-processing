@@ -2,14 +2,16 @@ PImage[] kaarten = new PImage[25];
 PImage achterkant; 
 
 int[] kaartenWaarde = new int[25];
+int eersteKaartIndex;
+int tweedeKaartIndex;
 
+ArrayList<int[]> kaartenPos = new ArrayList<int[]>();  
 
-ArrayList<int[]> kaartenPos = new ArrayList<int[]>();
+void laadKaarten() { 
 
-void laadKaarten() {  
   int waarde = 0;
 
-  for (int i = 0; i < kaartenWaarde.length - 1; i += 2) {
+  for (int i = 0; i < kaartenWaarde.length -1; i += 2) {
     kaarten[i] = loadImage("kaart" + waarde + ".png");
     kaarten[i + 1] = loadImage("kaart" + waarde + ".png");
 
@@ -18,7 +20,6 @@ void laadKaarten() {
 
     waarde++;
   }
-
   kaarten[kaarten.length - 1] = loadImage("kaart66.png");
   achterkant = loadImage("achterkant.png");
 
@@ -42,41 +43,45 @@ void calcKaartenPos() {
 }
 
 void tekenKaarten() {
+
   int[] temp = new int[2];
 
   for (int i = 0; i < kaartenPos.size(); i++) {
     temp = kaartenPos.get(i);
-    tekenKaart(temp[0], temp[1], i);
+    if (kaartenWaarde[i] != -1) {
+
+      tekenKaart(temp[0], temp[1], i);
+    }
   }
 }
 
 void tekenKaart(int x, int y, int index) {
 
-  //int temp;
-  
-  if (kaartenWaarde[index] >= 100) {
+  if (kaartenWaarde[index] >= 100) {  // <= 100 voor testen
     image(achterkant, x, y);
   } else {
     image(kaarten[index], x, y);
   }
-  
 }
 
 void calcKaartenWaarde() {
+
   int waarde = 0;
 
-  for (int i = 0; i < kaartenWaarde.length - 1; i += 2) {
+  for (int i = 0; i < kaartenWaarde.length -1; i += 2) {
     kaartenWaarde[i] = waarde + 100;
     kaartenWaarde[i + 1] = waarde + 100;
+
     waarde++;
   }
-  
   kaartenWaarde[kaartenWaarde.length - 1] = 66 + 100;
 }
 
 void shuffleKaarten() {
+
   int index1, index2, temp;
   PImage temp2;
+
   for (int i = 0; i < kaartenWaarde.length; i++) {
 
     index1 = round(random(0, kaartenWaarde.length - 1));
@@ -94,7 +99,9 @@ void shuffleKaarten() {
 }
 
 int isMuisOverKaart() {
+
   int[] temp;
+
   for (int i = 0; i < kaartenPos.size(); i++) {
     temp = kaartenPos.get(i);
     if (mouseX >= temp[0] && mouseX <= temp[0] + ZIJDE && mouseY >= temp[1] && mouseY <= temp[1] + ZIJDE) {
@@ -106,15 +113,21 @@ int isMuisOverKaart() {
 
 void draaiKaart(int index) {
 
-  int kaartWaarde = kaartenWaarde[index]; //<>//
+  int kaartWaarde = kaartenWaarde[index];
+
+  tekenKaarten();
 
   if (kaartWaarde >= 100) {
     kaartenWaarde[index] -= 100;
+    if (nOmgedraaideKaart == 0) {
+      eersteKaartIndex = index;
+    } 
+    if (nOmgedraaideKaart == 1) {
+      tweedeKaartIndex = index;
+    }
     nOmgedraaideKaart++;
-  } else {
+  } else { 
     kaartenWaarde[index] += 100;
-    nOmgedraaideKaart--;
+    nOmgedraaideKaart = 0;
   }
-  
- 
 }

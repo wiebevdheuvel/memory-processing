@@ -1,7 +1,6 @@
-
-
 void tekenKnop(String text, float x, float y, float knopBreedte, float knopHoogte) {
   fill(255);
+  rectMode(CORNER);
   rect(x, y, knopBreedte, knopHoogte);
   fill(0);
   textAlign(CENTER, CENTER);
